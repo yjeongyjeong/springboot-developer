@@ -4,13 +4,11 @@ import lombok.RequiredArgsConstructor;
 import me.yjeong.springbootdeveloper.domain.Article;
 import me.yjeong.springbootdeveloper.dto.AddArticleRequest;
 import me.yjeong.springbootdeveloper.dto.ArticleResponse;
+import me.yjeong.springbootdeveloper.dto.UpdateArticleRequest;
 import me.yjeong.springbootdeveloper.service.BlogService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,5 +34,27 @@ public class BlogApiController {
                 .toList();
 
         return ResponseEntity.ok().body(articles);
+    }
+
+    @GetMapping("/api/articles/{id}") //@PathVariable을 통해 URL에서 {id}에 해당하는 값이 id로 들어옴
+    public ResponseEntity<ArticleResponse> findArticle(@PathVariable("id") Long id){
+        Article article = blogService.findById(id);
+
+        return ResponseEntity.ok().body(new ArticleResponse(article));
+    }
+
+    @DeleteMapping("/api/articles/{id}")
+    public ResponseEntity<Void> deleteArticle(@PathVariable("id") Long id){
+        blogService.delete(id);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/api/articles/{id}")
+    //@RequestBody를 통해 HTTP의 body를 Java 객체로 역직렬화
+    public ResponseEntity<Article> updateArticle(@PathVariable("id") Long id, @RequestBody UpdateArticleRequest request){
+        Article updatedArticle = blogService.update(id, request);
+
+        return ResponseEntity.ok().body(updatedArticle);
     }
 }
