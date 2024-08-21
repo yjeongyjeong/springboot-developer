@@ -7,9 +7,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
+@EntityListeners(AuditingEntityListener.class)  // 엔티티 변경 시 @CreatedDate, @LastModifiedDate 등을 탐색해 해당값 자동 업데이트
 @Entity
 @Getter
 @NoArgsConstructor // 기본 생성자

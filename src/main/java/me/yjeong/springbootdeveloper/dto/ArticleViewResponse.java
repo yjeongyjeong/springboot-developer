@@ -1,16 +1,18 @@
 package me.yjeong.springbootdeveloper.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import me.yjeong.springbootdeveloper.domain.Article;
 
 import java.time.LocalDateTime;
 
 @Getter
+@NoArgsConstructor
 public class ArticleViewResponse {
-    private final Long id;
-    private final String title;
-    private final String content;
-    private final LocalDateTime createdAt;
+    private Long id;
+    private String title;
+    private String content;
+    private LocalDateTime createdAt;
 
     public ArticleViewResponse(Article article){
         this.id = article.getId();
