@@ -15,6 +15,6 @@ spring:
     console:
       enabled: true
 
-  jwt:
-    issuer: # 이슈 발급자
-    secret_key: # 비밀키
+jwt:
+  issuer: # 이슈 발급자
+  secret_key: # 비밀키
