@@ -60,7 +60,7 @@ public class TokenProviderTest {
                 .createToken(jwtProperties);
 
         //when
-        boolean result = tokenProvider.vaildToken(token);
+        boolean result = tokenProvider.validToken(token);
 
         //then
         assertThat(result).isFalse();
@@ -73,7 +73,7 @@ public class TokenProviderTest {
         String token = JwtFactory.withDefaultValues().createToken(jwtProperties);
 
         //when
-        boolean result = tokenProvider.vaildToken(token);
+        boolean result = tokenProvider.validToken(token);
 
         //then
         assertThat(result).isTrue();

@@ -5,6 +5,7 @@ import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import me.yjeong.springbootdeveloper.domain.User;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,6 +17,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Set;
 
+@Log4j2
 @RequiredArgsConstructor
 @Service
 public class TokenProvider {
@@ -42,14 +44,17 @@ public class TokenProvider {
     }
     
     // JWT 토큰 유효성 검증 메서드
-    public boolean vaildToken(String token){
+    public boolean validToken(String token){
         try {
             Jwts.parser()
                     .setSigningKey(jwtProperties.getSecretKey())    // 비밀값으로 복호화 (JWT를 생성한 키와 동일한 키를 사용해야 함)
                     .parseClaimsJws(token);
 
+            log.info("[TokenProvider.validToken] : token >> " + token);
+
             return true;
         } catch (Exception e){  // 복호화 과정에서 에러 발생 시 유효하지 않은 토큰
+            log.error("[TokenProvider.validToken] : ERROR" + e.getMessage());
             return false;
         }
     }
