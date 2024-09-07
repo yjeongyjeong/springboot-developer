@@ -18,7 +18,7 @@
                 <header class="mb-4">
                     <h1 class="fw-bolder mb-1" th:text="${article.title}" />
                     <div class="text-muted fst-italic mb-2"
-                         th:text="|Posted on ${#temporals.format(article.createdAt, 'yyyy-MM-dd HH:mm')}|" />
+                         th:text="|Posted on ${#temporals.format(article.createdAt, 'yyyy-MM-dd HH:mm')} By ${article.author}|" />
                 </header>
 
                 <section class="mb-5">
