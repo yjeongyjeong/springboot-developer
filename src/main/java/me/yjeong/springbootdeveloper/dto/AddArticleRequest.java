@@ -11,7 +11,6 @@ import me.yjeong.springbootdeveloper.domain.Article;
 public class AddArticleRequest {
     private String title;
     private String content;
-    private String author;
 
     public Article toEntity(String author){
         //생성자를 사용해 객체 생성
