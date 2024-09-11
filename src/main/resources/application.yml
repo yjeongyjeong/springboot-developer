@@ -8,9 +8,6 @@ spring:
     # 테이블 생성 후에 data.sql 실행
     defer-datasource-initialization: true
 
-  datasource:
-    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;
-    username: sa
   h2:
     console:
       enabled: true
@@ -20,12 +17,12 @@ spring:
       client:
         registration:
           google:
-            client-id: # 클라이언트 아이디
-            client-secret: # 클라이언트 보안 비밀번호
+            client-id: client-id
+            client-secret: client-secret
             scope:
               - email
               - profile
 
 jwt:
-  issuer: # 이슈 발급자
-  secret_key: # 비밀키
+  issuer: dbswjd4991@gmail.com
+  secret_key: secret-key
