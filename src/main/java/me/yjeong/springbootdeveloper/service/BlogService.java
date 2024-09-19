@@ -2,6 +2,7 @@ package me.yjeong.springbootdeveloper.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import me.yjeong.springbootdeveloper.config.error.exception.ArticleNotFoundException;
 import me.yjeong.springbootdeveloper.domain.Article;
 import me.yjeong.springbootdeveloper.dto.AddArticleRequest;
 import me.yjeong.springbootdeveloper.dto.UpdateArticleRequest;
@@ -26,12 +27,12 @@ public class BlogService {
 
     public Article findById(Long id){
         return blogRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
+                .orElseThrow(ArticleNotFoundException::new);
     }
 
     public void delete(Long id){
         Article article = blogRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
+                .orElseThrow(ArticleNotFoundException::new);
 
         // 게시글을 작성한 유저인지 확인
         authorizeArticleAuthor(article);
@@ -41,7 +42,7 @@ public class BlogService {
     @Transactional // 트랜잭션 메서드를 통해 수정을 보장 (원자성)
     public Article update(Long id, UpdateArticleRequest request){
         Article article = blogRepository.findById(id) //findById를 통해 영속성 컨텍스트에 의한 관리가 시작됨!
-                .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
+                .orElseThrow(ArticleNotFoundException::new);
 
         // 게시글을 작성한 유저인지 확인
         authorizeArticleAuthor(article);
